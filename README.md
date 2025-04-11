@@ -4,6 +4,8 @@ Welcome to **solitude.space** — your cozy little corner of the internet, built
 
 No sign-ups. No distractions. Just you and your thoughts.
 
+![Screenshot of the site](./screenshot.png)
+
 ---
 
 ## ✨ What is solitude.space?
