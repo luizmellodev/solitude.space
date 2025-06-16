@@ -21,7 +21,7 @@ interface AmbientSoundsWidgetProps {
 const youtubeVideos = {
   rain: "mPZkdNFkNps", // Som de chuva
   whitenoise: "nMfPqeZjc2c", // Ruído branco
-  coffee: "BOdLmxy06bU", // Sons de cafeteria - ID atualizado
+  coffee: "0QKdqm5TX6c", // Sons de cafeteria - ID atualizado
   fire: "L_LUpnjgPso", // Som de lareira
   waves: "Nep1qytq9JM", // Sons de ondas do oceano
   birds: "Qm846KdZN_c", // Sons de pássaros
@@ -199,10 +199,12 @@ export default function AmbientSoundsWidget({ id, onToggle, onSoundToggle }: Amb
         {allSounds.map((sound) => (
           <iframe
             key={sound.id}
-            ref={(el) => (iframeRefs.current[sound.id] = el)}
+            ref={(el) => {
+              if (el) iframeRefs.current[sound.id] = el;
+            }}
             width="1"
             height="1"
-            src={`https://www.youtube.com/embed/${youtubeVideos[sound.id]}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&loop=1&playlist=${youtubeVideos[sound.id]}`}
+            src={`https://www.youtube.com/embed/${youtubeVideos[sound.id as keyof typeof youtubeVideos]}?enablejsapi=1&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&loop=1&playlist=${youtubeVideos[sound.id as keyof typeof youtubeVideos]}`}
             title={`${sound.name} Sound`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             frameBorder="0"

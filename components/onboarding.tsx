@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, Clock, CloudRain, CheckSquare, Paintbrush } from "lucide-react";
+import { Music, Clock, CloudRain, CheckSquare, Paintbrush, X } from "lucide-react";
 import { useAppTheme } from "@/components/theme-context";
 
 interface OnboardingProps {
@@ -85,6 +85,13 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
     { id: "cute", name: "Cute", icon: "🌸" },
   ];
 
+  const handleClose = () => {
+    setIsExiting(true);
+    setTimeout(() => {
+      onComplete();
+    }, 500);
+  };
+
   return (
     <AnimatePresence>
       {!isExiting && (
@@ -99,8 +106,17 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 100 }}
-            className="bg-zinc-900/90 backdrop-blur-xl border border-purple-500/20 rounded-xl p-8 max-w-md w-full shadow-xl"
+            className="bg-zinc-900/90 backdrop-blur-xl border border-purple-500/20 rounded-xl p-8 max-w-md w-full shadow-xl relative"
           >
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleClose}
+              className="absolute top-2 right-2 text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+
             <div className="text-center mb-6">
               <motion.div
                 key={`icon-${step}`}
